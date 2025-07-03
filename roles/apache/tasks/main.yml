@@ -1,0 +1,12 @@
+---
+- name: Installer Apache2
+  apt:
+    name: apache2
+    state: present
+    update_cache: yes
+
+- name: Activer Apache au démarrage
+  systemd:
+    name: apache2
+    enabled: yes
+    state: started

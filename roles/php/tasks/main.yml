@@ -1,0 +1,24 @@
+---
+- name: Installer PHP et modules nécessaires
+  apt:
+    name:
+      - php
+      - php-cli
+      - libapache2-mod-php
+      - php-mysql
+      - php-curl
+      - php-xml
+      - php-mbstring
+      - php-zip
+      - php-gd
+    state: present
+    update_cache: yes
+
+- name: Activer le module PHP dans Apache
+  command: a2enmod php7.4
+  # Remplace php7.4 par ta version si besoin
+
+- name: Redémarrer Apache
+  systemd:
+    name: apache2
+    state: restarted

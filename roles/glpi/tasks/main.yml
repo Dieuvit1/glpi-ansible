@@ -1,0 +1,18 @@
+---
+- name: Télécharger GLPI
+  get_url:
+    url: https://github.com/glpi-project/glpi/releases/download/10.0.9/glpi-10.0.9.tgz
+    dest: /tmp/glpi.tgz
+
+- name: Extraire GLPI dans /var/www/html
+  unarchive:
+    src: /tmp/glpi.tgz
+    dest: /var/www/html
+    remote_src: yes
+
+- name: Changer la propriété des fichiers GLPI
+  file:
+    path: /var/www/html/glpi
+    owner: www-data
+    group: www-data
+    recurse: yes

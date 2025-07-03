@@ -1,0 +1,2 @@
+[glpi]
+glpi.local ansible_user=glpi ansible_become=true

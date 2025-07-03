@@ -1,0 +1,6 @@
+---
+- name: Setup MariaDB for GLPI
+  hosts: glpi
+  become: yes
+  roles:
+    - mariadb

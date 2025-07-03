@@ -1,0 +1,28 @@
+---
+- name: Secure GLPI server
+  hosts: glpi
+  become: yes
+  tasks:
+    - name: Activer le pare-feu UFW
+      ufw:
+        state: enabled
+        policy: deny
+
+    - name: Autoriser les connexions SSH
+      ufw:
+        rule: allow
+        name: OpenSSH
+
+    - name: Autoriser HTTP et HTTPS
+      ufw:
+        rule: allow
+        port: "{{ item }}"
+      loop:
+        - 80
+        - 443
+
+    - name: Générer un certificat SSL auto-signé
+      openssl_certificate:
+        path: /etc/ssl/certs/glpi.crt
+        privatekey_path: /etc/ssl/private/glpi.key
+        common_name: "glpi.local"
